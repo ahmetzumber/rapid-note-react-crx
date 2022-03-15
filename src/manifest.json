@@ -1,6 +1,6 @@
 {
-  "name": "Firebase v9 Example Template",
-  "description": "Firebase v9 Example Template - Rustyzone",
+  "name": "Rapid Note",
+  "description": "By using this extension you can save your notes that you took from on internet.",
   "background": { "scripts": ["background/index.js"] },
   "content_scripts": [
     {
@@ -8,5 +8,19 @@
       "matches": ["https://*/*", "http://*/*"]
     }
   ],
-  "browser_action": { "default_popup": "pages/popup/index.html" }
+  "browser_action": { 
+    "default_popup": "pages/popup/index.html",
+    "default_icon": {
+      "16": "/images/note.png",
+      "32": "/images/note(1).png",
+      "48": "/images/note(2).png",
+      "128": "/images/note(3).png"
+    }
+  },
+  "icons": {
+    "16": "/images/note.png",
+    "32": "/images/note(1).png",
+    "48": "/images/note(2).png",
+    "128": "/images/note(3).png"
+  }
 }

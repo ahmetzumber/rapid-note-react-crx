@@ -1,12 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=1000, initial-scale=1.0" />
-    <title>Popup Page</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script src="index.js"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            width: 350px;
+            height: 300px;
+        }
+        *{
+            outline: none;
+            font-family: 'Capriola', sans-serif;
+        }
+        .head {
+            margin-top: 12%;
+            color:#220B57;
+            display: flex;
+            place-content: center; 
+        }
+        #title {
+            font-weight: bold;
+            font-size: 29px;
+        }
+        .wrapper{
+            padding: 25px;
+            display: grid;
+            place-content: center;
+        }
+        input {
+            height: 25px;
+            width: 200px;
+            margin: 5px;    
+            border: rgb(0, 0, 0);
+            border-radius: 4px;
+
+            color: black;
+            box-shadow: 1px 1px 6px 1px rgba(0.15, 0.15, 0.15, 0.15);
+        }
+        label{
+            margin-left: 10px;
+            color: rgb(87, 82, 82);
+            font-size: 15px;
+        }
+        #signIn {
+            width: 120px;
+            height: 30px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: bold;
+            margin-left: 32%;
+            margin-bottom: 20px;
+            background-color: #220B57;
+            box-shadow: 1px 1px 6px 1px rgba(0.15, 0.15, 0.15, 0.15);
+        }
+        button:active {
+                background-color: #eeeeee;
+                box-shadow: 1px 1px 3px 1px rgba(0.2, 0.2, 0.1, 0.2);
+                transform: translateY(4px);
+            }
+        img{
+            margin-right: 2%;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Capriola&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div>
+        <div class="head">
+            <div id="title">Rapid Note</div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <label for="userMail">Email</label>
+        <input type="email" id="userMail"><br>
+        <label for="userPass">Password</label>
+        <input type="password" id="userPass"><br>
+    </div>
+    <button id="signIn">SIGN IN</button>
+</body>
 </html>
+
