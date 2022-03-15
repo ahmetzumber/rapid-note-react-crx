@@ -19,6 +19,7 @@
     "prettier": "^2.2.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
+    "styled-components": "^5.3.3",
     "webextension-polyfill": "^0.7.0"
   },
   "devDependencies": {
