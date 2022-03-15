@@ -11,16 +11,16 @@
   "browser_action": { 
     "default_popup": "pages/popup/index.html",
     "default_icon": {
-      "16": "/images/note.png",
-      "32": "/images/note(1).png",
-      "48": "/images/note(2).png",
-      "128": "/images/note(3).png"
+      "16": "/images/demo.png",
+      "32": "/images/demo.png",
+      "48": "/images/demo.png",
+      "128": "/images/demo.png"
     }
   },
   "icons": {
-    "16": "/images/note.png",
-    "32": "/images/note(1).png",
-    "48": "/images/note(2).png",
-    "128": "/images/note(3).png"
+    "16": "/images/demo.png",
+    "32": "/images/demo.png",
+    "48": "/images/demo.png",
+    "128": "/images/demo.png"
   }
 }
