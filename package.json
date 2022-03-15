@@ -11,6 +11,9 @@
     "test": "jest"
   },
   "dependencies": {
+    "@emotion/react": "^11.8.2",
+    "@emotion/styled": "^11.8.1",
+    "@mui/material": "^5.5.1",
     "@types/chrome": "^0.0.127",
     "@types/firefox-webext-browser": "^82.0.0",
     "@types/react": "^17.0.0",

@@ -1,6 +1,8 @@
 import React from 'react'
+import { useState } from 'react';
 import styled from 'styled-components'
-import { action } from 'webextension-polyfill';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
 
 const Body = styled.body`
   width: 350px;
@@ -61,22 +63,68 @@ const Button = styled.button`
   }
 `;
 
+const Middle = styled.div`
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%) 
+`;
+
 
 const App = () => {
+
+  const [user, setUser] = useState({
+    email: "",
+    password: ""
+  });
+
+  const [isLoginSuccesfull, setIsLoginSuccesfull] = useState(false);
+
+  const handleSubmit = () => {
+    if(user.email === "" || user.password === ""){
+        window.alert('Please fill in the required fields!')
+    }else{
+        setIsLoginSuccesfull(true)
+        //window.alert('Succesfull login !!')
+        //window.location.replace("/user")
+    }
+}
+
+
   return (
     <div style={{ width:350, height: 300, fontFamily:'Capriola' }}>
-        <div>
-          <HeadDiv>
-              <TitleDiv>Rapid Note</TitleDiv>
-          </HeadDiv>
-        </div>
-        <WrapperDiv>
-          <Label for="userMail">Email</Label>
-          <Input type="email" id="userMail"/><br/>
-          <Label for="userPass">Password</Label>
-          <Input type="password" id="userPass"/><br/>
-        </WrapperDiv>
-        <Button id="signIn">SIGN IN</Button>
+        {isLoginSuccesfull?
+          <Middle>
+            <Box sx={{ display: 'flex' }} style={{ placeContent: 'center', position: 'relative' }}>
+              <CircularProgress color="secondary"/>
+            </Box>
+            <br/><br/>
+            <div style={{ display: 'flex', placeContent: 'center', fontSize: 14, color: '#220B57' }}>
+              Succesfully login..
+            </div><br/>
+            <div style={{ fontSize: 14, color: '#220B57' }}>
+              Your service working at background !!
+            </div>
+          </Middle>
+          :
+          <div>
+            <div>
+            <HeadDiv>
+                <TitleDiv>Rapid Note</TitleDiv>
+            </HeadDiv>
+            </div>
+            <WrapperDiv>
+              <Label>Email</Label>
+              <Input type="email" id="userMail" onChange={(e) => setUser({ ...user, email: e.target.value })}/><br/>
+              <Label>Password</Label>
+              <Input type="password" id="userPass" onChange={(e) => setUser({ ...user, password: e.target.value })}/><br/>
+            </WrapperDiv>
+            <Button id="signIn" onClick={() => handleSubmit()}>SIGN IN</Button>
+          </div>
+        }
+        
     </div>
   )
 }
