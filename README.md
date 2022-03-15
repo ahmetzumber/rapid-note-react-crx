@@ -1,31 +1,46 @@
-# A Chrome Extension Template for Firebase v9 - Based on https://github.com/extend-chrome/js-react-boilerplate
+# Rapid Note - Chrome Extension
+
+In this project, the web-based application and its browser extension will be developed. This application provides people that work on specific field how they can store information that can be beneficial and how they manage their information’s sources. Thanks to this browser extension, the user will be able to save the information and information source he has obtained without leaving the page of the source he is on. Afterwards, they will be able to manage all this data through the web-based application.
 
 ---
 
-# Firebase v9 - Chrome Extension
 
-### Getting Started
+## Getting Started
 
 Clone Template Repo:
 
-Make and cd into an empty folder of your choice
+- Template with React: https://github.com/extend-chrome/js-react-boilerplate
+- Template with React and Firebase: https://github.com/rustyzone/crx-firebase-v9
 
-$ `git clone https://github.com/rustyzone/crx-firebase-v9.git .`
+If you want to use or add new feature to this extension:
 
-Install:
+```bash
+git clone https://github.com/ahmetzumber/rapid-note-react-crx.git .
+```
 
-Run either `npm install` or `yarn install`
+Installation:
+Run either
+```js
+npm install 
+//or 
+yarn install
+```
 
-### Use Rollup For Dev, Builds & Releases
-
-`npm run dev` 
+To start development environment.
+```bash
+npm run dev
+```
 
 Making changes will refresh the build for faster development
 
-`npm run build`
+```bash
+npm run build
+```
 
 Make builds
 
-`npm run release`
+```bash
+npm run release
+```
 
 Create a .zip build ready to submit to the Chrome Web Store
