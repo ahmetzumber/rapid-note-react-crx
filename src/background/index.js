@@ -1,5 +1,15 @@
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc, getDocs, doc, setDoc } from "firebase/firestore"
+import { getFirestore, 
+  collection, 
+  getDocs, 
+  doc, 
+  setDoc
+} from "firebase/firestore"
+import { 
+  getAuth,
+  signInWithEmailAndPassword
+ } from "firebase/auth"; 
+
 
 // Set the configuration for your app
 // TODO: Replace with your project's config object
@@ -16,8 +26,8 @@ const firebaseConfig = {
 
 initializeApp(firebaseConfig);
 const db = getFirestore();
+const auth = getAuth();
 
-console.log('background script logic here...')
 
 
 chrome.runtime.onInstalled.addListener(async () => {
