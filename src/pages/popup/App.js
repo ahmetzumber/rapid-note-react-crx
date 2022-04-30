@@ -1,77 +1,45 @@
 import React from 'react'
 import { useState } from 'react';
-import styled from 'styled-components'
+import { 
+  Middle,
+  Button,
+  Input,
+  Label,
+  WrapperDiv,
+  TitleDiv,
+  HeadDiv
+} from './Styled.js'
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, 
+  collection, 
+  getDocs,
+  getDoc,
+  doc, 
+  setDoc
+} from "firebase/firestore"
+import { 
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider
+ } from "firebase/auth"; 
 
-const Body = styled.body`
-  width: 350px;
-  height: 300px;
-`;
+const firebaseConfig = {
+    apiKey: "AIzaSyCAAnIWGjZ4eczEqvmcxlOEb1ZvZAIVwUY",
+    authDomain: "note-application-bbacc.firebaseapp.com",
+    databaseURL: "https://note-application-bbacc-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "note-application-bbacc",
+    storageBucket: "note-application-bbacc.appspot.com",
+    messagingSenderId: "813349799108",
+    appId: "1:813349799108:web:bc44d2552bd63a7faeb591",
+    measurementId: "G-71ETHEM64C"
+};
 
-const HeadDiv = styled.div`
-  margin-top: 12%;
-  color:#220B57;
-  display: flex;
-  place-content: center; 
-`;
-
-const TitleDiv = styled.div`
-  font-weight: bold;
-  font-size: 29px;
-`;
-
-const WrapperDiv = styled.div`
-  padding: 25px;
-  display: grid;
-  place-content: center;
-`;
-
-const Label = styled.label`
-  margin-left: 10px;
-  color: rgb(87, 82, 82);
-  font-size: 15px;
-`;
-
-const Input = styled.input`
-  height: 25px;
-  width: 200px;
-  margin: 5px;    
-  border: rgb(0, 0, 0);
-  border-radius: 4px;
-
-  color: black;
-  box-shadow: 1px 1px 6px 1px rgba(0.15, 0.15, 0.15, 0.15);
-`;
-
-const Button = styled.button`
-  width: 120px;
-  height: 30px;
-  border: none;
-  border-radius: 8px;
-  color: white;
-  font-weight: bold;
-  margin-left: 32%;
-  margin-bottom: 20px;
-  background-color: #220B57;
-  box-shadow: 1px 1px 6px 1px rgba(0.15, 0.15, 0.15, 0.15);
-  :active {
-    color: white;
-    transform: translateY(4px);
-    background-color: #220B57;
-    box-shadow: 1px 1px 5px 1px rgba(0.1, 0.1, 0.1, 0.1);
-  }
-`;
-
-const Middle = styled.div`
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%) 
-`;
-
+initializeApp(firebaseConfig);
+const db = getFirestore();
+const auth = getAuth();
+const provider = new GoogleAuthProvider();
 
 const App = () => {
 
@@ -82,15 +50,40 @@ const App = () => {
 
   const [isLoginSuccesfull, setIsLoginSuccesfull] = useState(false);
 
-  const handleSubmit = () => {
-    if(user.email === "" || user.password === ""){
-        window.alert('Please fill in the required fields!')
-    }else{
+  const addUser = async (userName, userMail) => {
+    await setDoc(doc(db, "members", userName), {
+      username: userName,
+      email: userMail,
+    });
+    console.log("ekledim");
+  }
+
+  const signIn = e => {
+    e.preventDefault();
+    signInWithPopup(auth, provider)
+      .then(async (result) => {
+        const user = result.user;
+        console.log(user);
+        let username = user.displayName.replace(/\s+/g, "");
+        const docRef = doc(db, "members", username);
+        const docSnap = await getDoc(docRef);
+        if (!docSnap.exists()) {
+          await addUser(username, user.email);
+        }
         setIsLoginSuccesfull(true)
-        //window.alert('Succesfull login !!')
-        //window.location.replace("/user")
-    }
-}
+        window.alert('Succesfull login !!')
+        window.location.replace("/user")
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+  }
+
+  const routeCreateAccount = () => {
+    window.open(
+      "https://accounts.google.com/signup/v2/webcreateaccount?flowName=GlifWebSignIn&flowEntry=SignUp"
+    );
+  }
 
 
   return (
@@ -116,12 +109,10 @@ const App = () => {
             </HeadDiv>
             </div>
             <WrapperDiv>
-              <Label>Email</Label>
-              <Input type="email" id="userMail" onChange={(e) => setUser({ ...user, email: e.target.value })}/><br/>
-              <Label>Password</Label>
-              <Input type="password" id="userPass" onChange={(e) => setUser({ ...user, password: e.target.value })}/><br/>
+              <Button id="signIn" onClick={e => signIn(e)}>Log in with Google</Button>
+              <Label>Don't you have an account?</Label>
+              <Button id="signIn" onClick={() => routeCreateAccount()}>Create a Google Account</Button>
             </WrapperDiv>
-            <Button id="signIn" onClick={() => handleSubmit()}>SIGN IN</Button>
           </div>
         }
         
