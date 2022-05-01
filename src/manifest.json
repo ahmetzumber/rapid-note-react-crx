@@ -23,5 +23,5 @@
     "48": "/images/demo.png",
     "128": "/images/demo.png"
   },
-  "content_security_policy": "script-src 'self' https://apis.google.com/js/api.js; https://apis.google.com/_/scs/abc-static/_/js/k=gapi.lb.en.iTmf4rxOyWc.O/m=gapi_iframes/rt=j/sv=1/d=1/ed=1/rs=AHpOoo-LTnDn-AS2QlMWYZdnaV1OuFR7Iw/cb=gapi.loaded_0?le=scs; object-src 'self'"
+  "content_security_policy": "script-src 'self' https://apis.google.com/js/api.js https://apis.google.com; object-src 'self'"
 }
