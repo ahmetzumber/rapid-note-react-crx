@@ -3,11 +3,12 @@ import { getFirestore,
   collection, 
   getDocs, 
   doc, 
-  setDoc
+  setDoc,
+  updateDoc,
+  arrayUnion
 } from "firebase/firestore"
 import { 
-  getAuth,
-  signInWithEmailAndPassword
+  getAuth
  } from "firebase/auth"; 
 
 
@@ -61,10 +62,13 @@ chrome.runtime.onInstalled.addListener(async () => {
 	      let result = window.prompt(message);
 
         try {
-          const docRef = await setDoc(doc(db, "project", result), {
-            data: readData.selectionText,
-            data_url: readData.pageUrl
-          });
+          let note = { data: readData.selectionText, data_url: readData.pageUrl }
+
+          const projectRef = doc(db, "project", result)
+          const docRef = await setDoc(projectRef, {});
+          await updateDoc(projectRef, {
+            Notes: arrayUnion(note)
+          })
 
           if (docRef !== null) 
             window.open('http://localhost:8081/')
@@ -80,10 +84,12 @@ chrome.runtime.onInstalled.addListener(async () => {
         console.log(readData.selectionText)
         console.log(readData.pageUrl)
 
-        await setDoc(doc(db, "project", readData.menuItemId), {
-          data: readData.selectionText,
-          data_url: readData.pageUrl
-        });
+        let note = { data: readData.selectionText, data_url: readData.pageUrl }
+
+        const projectRef = doc(db, "project", readData.menuItemId)
+        await updateDoc(projectRef, {
+          Notes: arrayUnion(note)
+        })
 
       }
   }) // contextMenus.onClicked
