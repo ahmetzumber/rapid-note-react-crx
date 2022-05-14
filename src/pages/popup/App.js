@@ -64,11 +64,10 @@ const App = () => {
       .then(async (result) => {
         const user = result.user;
         console.log(user);
-        let username = user.displayName.replace(/\s+/g, "");
-        const docRef = doc(db, "members", username);
+        const docRef = doc(db, "members", user.email);
         const docSnap = await getDoc(docRef);
         if (!docSnap.exists()) {
-          await addUser(username, user.email);
+          await addUser(user.email,user.displayName);
         }
         setIsLoginSuccesfull(true)
         window.alert('Succesfull login !!')

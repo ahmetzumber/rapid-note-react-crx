@@ -65,7 +65,9 @@ chrome.runtime.onInstalled.addListener(async () => {
           let note = { data: readData.selectionText, data_url: readData.pageUrl }
 
           const projectRef = doc(db, "project", result)
-          const docRef = await setDoc(projectRef, {});
+          const docRef = await setDoc(projectRef, {
+            project_name:result
+          });
           await updateDoc(projectRef, {
             Notes: arrayUnion(note)
           })
