@@ -32,6 +32,7 @@ const auth = getAuth();
 
 
 chrome.runtime.onInstalled.addListener(async () => {
+  console.log(localStorage.getItem("email"))
 
   const projectCollection = await getDocs(collection(db, "project"));
 

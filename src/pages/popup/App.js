@@ -69,9 +69,8 @@ const App = () => {
         if (!docSnap.exists()) {
           await addUser(user.email,user.displayName);
         }
+        localStorage.setItem("email", user.email);
         setIsLoginSuccesfull(true)
-        window.alert('Succesfull login !!')
-        window.location.replace("/user")
       })
       .catch((error) => {
         alert(error.message);
