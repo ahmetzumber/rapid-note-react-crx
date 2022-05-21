@@ -1,6 +1,6 @@
 console.log('content script')
 import { initializeApp } from 'firebase/app';
-import { getFirestore, doc, onSnapshot } from "firebase/firestore"
+import { getFirestore, doc, onSnapshot } from "firebase/firestore";
 const firebaseConfig = {
     apiKey: "AIzaSyCAAnIWGjZ4eczEqvmcxlOEb1ZvZAIVwUY",
     authDomain: "note-application-bbacc.firebaseapp.com",
@@ -11,22 +11,31 @@ const firebaseConfig = {
     appId: "1:813349799108:web:bc44d2552bd63a7faeb591",
     measurementId: "G-71ETHEM64C"
 };
-let data;
 initializeApp(firebaseConfig);
 const db = getFirestore();
-let paragraphs = document.getElementsByTagName('p');
-let lists = document.getElementsByTagName('li');
 onSnapshot(doc(db, "Search", "Note"), (doc) => {
+
+    let paragraphs = document.getElementsByTagName('p');
+    let lists = document.getElementsByTagName('li');
+    let spans = document.getElementsByTagName('span')
+
     for (let elt of paragraphs) {
         for (let list of lists) {
-            if (elt.textContent.includes(doc.data().Text)) {
-                elt.style.backgroundColor = "yellow";
-                elt.scrollIntoView();
+            for (let span of spans) {
+                if (elt.textContent.includes(doc.data().Text)) {
+                    elt.style.backgroundColor = "yellow";
+                    elt.scrollIntoView();
+                }
+                else if (list.textContent.includes(doc.data().Text)) {
+                    list.style.backgroundColor = "yellow";
+                    list.scrollIntoView();
+                }
+                else if (span.textContent.includes(doc.data().Text)) {
+                    span.style.backgroundColor = "yellow";
+                    span.scrollIntoView();
+                }
             }
-            else if(list.textContent.includes(doc.data().Text)){
-                list.style.backgroundColor = "yellow";
-                list.scrollIntoView();
-            }
+
         }
     }
 

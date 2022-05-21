@@ -6,6 +6,7 @@
     {
       "js": ["content/index.js"],
       "matches": ["https://*/*", "http://*/*"]
+      
     }
   ],
   "browser_action": { 
@@ -23,5 +24,10 @@
     "48": "/images/demo.png",
     "128": "/images/demo.png"
   },
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "scripting"
+ ],
   "content_security_policy": "script-src 'self' https://apis.google.com/js/api.js https://apis.google.com; object-src 'self'"
 }
