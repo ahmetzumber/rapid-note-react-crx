@@ -107,7 +107,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 
       chrome.contextMenus.create({
         "id": contextItems[i].id + "CreateSub",
-        "title": 'Save as a New Sub Project',
+        "title": 'Save as a New Sub Folder',
         "parentId": contextItems[i].id,
         "type": "normal",
         "contexts": ["selection"],

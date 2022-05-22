@@ -17,8 +17,6 @@ onSnapshot(doc(db, "Search", "Note"), (doc) => {
 
     let paragraphs = document.getElementsByTagName('p');
     let lists = document.getElementsByTagName('li');
-    let spans = document.getElementsByTagName('span')
-
     for (let elt of paragraphs) {
         for (let list of lists) {
             for (let span of spans) {
@@ -29,10 +27,6 @@ onSnapshot(doc(db, "Search", "Note"), (doc) => {
                 else if (list.textContent.includes(doc.data().Text)) {
                     list.style.backgroundColor = "yellow";
                     list.scrollIntoView();
-                }
-                else if (span.textContent.includes(doc.data().Text)) {
-                    span.style.backgroundColor = "yellow";
-                    span.scrollIntoView();
                 }
             }
 
