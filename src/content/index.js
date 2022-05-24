@@ -19,15 +19,13 @@ onSnapshot(doc(db, "Search", "Note"), (doc) => {
     let lists = document.getElementsByTagName('li');
     for (let elt of paragraphs) {
         for (let list of lists) {
-            for (let span of spans) {
-                if (elt.textContent.includes(doc.data().Text)) {
-                    elt.style.backgroundColor = "yellow";
-                    elt.scrollIntoView();
-                }
-                else if (list.textContent.includes(doc.data().Text)) {
-                    list.style.backgroundColor = "yellow";
-                    list.scrollIntoView();
-                }
+            if (elt.textContent.includes(doc.data().Text)) {
+                elt.style.backgroundColor = "yellow";
+                elt.scrollIntoView();
+            }
+            else if (list.textContent.includes(doc.data().Text)) {
+                list.style.backgroundColor = "yellow";
+                list.scrollIntoView();
             }
 
         }
